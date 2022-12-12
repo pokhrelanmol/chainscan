@@ -9,6 +9,7 @@ import Block from "./components/Block";
 import Transaction from "./components/Transaction";
 import AccountInfo from "./components/AccountTxs";
 import AccountTxs from "./components/AccountTxs";
+import AccountBalance from "./components/AccountBalance";
 
 function App() {
     return (
@@ -19,7 +20,6 @@ function App() {
                     path="/"
                     element={
                         <div>
-                            <Search />
                             <div className="flex justify-evenly my-10">
                                 <Blocks />
                                 <Transactions />
@@ -27,6 +27,7 @@ function App() {
                         </div>
                     }
                 />
+                <Route path="/account-balance" element={<AccountBalance />} />
                 <Route path="/block/:blockNumber" element={<Block />} />
                 <Route path="/transaction/:txHash" element={<Transaction />} />
                 <Route path="/transactions/:address" element={<AccountTxs />} />

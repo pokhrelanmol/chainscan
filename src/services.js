@@ -8,7 +8,9 @@ const settings = {
 
 export const alchemy = new Alchemy(settings);
 
-// make all api call here and call these functions on first render
+/*******************************************************************
+ * MAKE ALL API CALL HERE AND CALL THESE FUNCTIONS ON FIRST RENDER *
+ *******************************************************************/
 export const getLastTenBlocks = async () => {
     const lastTenBlocks = [];
     const latestBlock = await alchemy.core.getBlockNumber();
@@ -41,13 +43,17 @@ export const getIndividualTransaction = async (txhash) => {
     const tx = await alchemy.transact.getTransaction(txhash);
     return tx;
 };
-
-// Etherscan api calls
+export const getAccountBalance = async (address) => {
+    const balance = await alchemy.core.getBalance(address, "latest");
+    return balance;
+};
+/***********************
+ * ETHERSCAN API CALLS *
+ ***********************/
 export const getAccountTxs = async (address) => {
-    const API_ENDPOINT = `https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=${ETHERSCAN_API_KEY}`;
+    const API_ENDPOINT = `https://api.etherscan.io/api?module=account&action=txlist&address=${address}&startblock=0&endblock=99999999&page=1&offset=20&sort=asc&apikey=${ETHERSCAN_API_KEY}`;
 
     const response = await fetch(API_ENDPOINT);
     const data = await response.json();
-    console.log(data.result);
     return data.result;
 };

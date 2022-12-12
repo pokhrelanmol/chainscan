@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { joinClasses } from "../helper";
 
-const Search = () => {
+const Search = ({ handleSearch }) => {
+    const [onChange, setOnChange] = useState("");
     return (
         <div className="text-center my-10">
             <input
@@ -13,7 +14,8 @@ const Search = () => {
                     "bg-gray-200",
                     "focus:outline-blue-500"
                 )}
-                placeholder="Transaction Hash"
+                onChange={(e) => setOnChange(e.target.value)}
+                placeholder="Address"
             />
             <button
                 className={joinClasses(
@@ -24,6 +26,7 @@ const Search = () => {
                     "-ml-5",
                     "p-3"
                 )}
+                onClick={() => handleSearch(onChange)}
             >
                 Search
             </button>

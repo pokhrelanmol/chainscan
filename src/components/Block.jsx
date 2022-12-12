@@ -1,9 +1,10 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { formatAddress, formatEther, joinClasses } from "../helper";
 import { getIndividualBlock } from "../services";
 const Block = () => {
+    const navigate = useNavigate();
     const { blockNumber } = useParams();
     console.log(blockNumber);
     const [blockData, setBlockData] = useState();
@@ -97,8 +98,23 @@ const Block = () => {
                         <div className="block-data">
                             Transactions Count:{" "}
                             <span className="text-blue-600">
-                                {blockData.transactions.length || 0}{" "}
+                                {blockData.transactions.length}{" "}
                             </span>
+                        </div>
+                        <div className="w-full space-y-3  h-32 overflow-scroll flex flex-col">
+                            <span className="mb-5">Transactions</span>
+                            {blockData.transactions.map((tx) => (
+                                <ul className="">
+                                    <li
+                                        className="cursor-pointer text-blue-600"
+                                        onClick={() =>
+                                            navigate(`/transaction/${tx}`)
+                                        }
+                                    >
+                                        {tx}
+                                    </li>
+                                </ul>
+                            ))}
                         </div>
                     </>
                 )}

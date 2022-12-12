@@ -63,7 +63,12 @@ const Transaction = ({
             </div>
             <div className=".">
                 Transaction Hash:{" "}
-                <span className="text-blue-600"> {formatAddress(txHash)}</span>
+                <span
+                    className="text-blue-600 cursor-pointer"
+                    onClick={() => navigate(`/transaction/${txHash}`)}
+                >
+                    {formatAddress(txHash)}
+                </span>
             </div>
             <div className=".">
                 TimeStamp: <span className="text-blue-600"> {timeStamp}</span>

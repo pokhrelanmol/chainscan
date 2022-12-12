@@ -56,7 +56,7 @@ const Transaction = () => {
                         </div>
                         <div className="block-data">
                             Transaction Hash:{" "}
-                            <span className="text-blue-600">
+                            <span className="text-blue-600 ">
                                 {" "}
                                 {txData.hash}{" "}
                             </span>
