@@ -1,34 +1,44 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { formatAddress, formatEther, joinClasses } from "../helper";
 import { getLastTenTxs } from "../services";
-const Transaction = ({ from, to, txhash, amount }) => {
+const TransactionMinimal = ({ from, to, txhash, amount }) => {
+    const navigate = useNavigate();
+    const handleTransactionDetails = async (txHash) => {
+        navigate(`/transaction/${txHash}`);
+    };
     return (
         <div
             className={joinClasses(
                 "bg-gray-200",
                 "flex",
-                "gap-4",
+                "gap-8",
                 "mt-2",
-                "p-4"
+                "p-4",
+
+                "rounded"
             )}
         >
             <div>
+                Tx Hash:{" "}
+                <span
+                    className="text-blue-600 cursor-pointer"
+                    onClick={() => handleTransactionDetails(txhash)}
+                >
+                    {formatAddress(txhash)}
+                </span>
+            </div>{" "}
+            <div onClick={() => navigate(`/transactions/${from}`)}>
                 From:{" "}
                 <span className="text-blue-600 cursor-pointer">
                     {formatAddress(from)}
                 </span>
             </div>
-            <div>
+            <div onClick={() => navigate(`/transations/${to}`)}>
                 To:{" "}
                 <span className="text-blue-600 cursor-pointer">
                     {formatAddress(to)}
-                </span>
-            </div>
-            <div>
-                Tx Hash:{" "}
-                <span className="text-blue-600 cursor-pointer">
-                    {formatAddress(txhash)}
                 </span>
             </div>
             <div>
@@ -43,22 +53,25 @@ const Transactions = () => {
     useEffect(() => {
         (async () => {
             const txs = await getLastTenTxs();
-            console.log(txs);
             setTransactions(txs);
         })();
     }, []);
     return (
         <div>
-            <h1 className="text-2xl mb-5">Latest Transactions</h1>
-            {transactions.map(({ hash, to, from, value }) => (
-                <Transaction
-                    key={hash}
-                    from={from}
-                    to={to}
-                    txhash={hash}
-                    amount={value.toString()}
-                />
-            ))}
+            <h1 className="text-2xl text-center mb-5">Latest Transactions</h1>
+            {transactions.length ? (
+                transactions.map(({ hash, to, from, value }) => (
+                    <TransactionMinimal
+                        key={hash}
+                        from={from}
+                        to={to}
+                        txhash={hash}
+                        amount={value.toString()}
+                    />
+                ))
+            ) : (
+                <div>Loading...</div>
+            )}
         </div>
     );
 };

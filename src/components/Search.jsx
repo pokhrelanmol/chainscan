@@ -3,7 +3,7 @@ import { joinClasses } from "../helper";
 
 const Search = () => {
     return (
-        <div className="text-center mt-10">
+        <div className="text-center my-10">
             <input
                 type="text"
                 className={joinClasses(

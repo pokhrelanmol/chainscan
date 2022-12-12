@@ -1,12 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { formatAddress, joinClasses } from "../helper";
-import { getIndividualBlock, getLastTenBlocks } from "../services";
+import { getLastTenBlocks } from "../services";
 import { useNavigate } from "react-router-dom";
 const BlockMinimal = ({ blockNumber, txCount, validator }) => {
     const navigate = useNavigate();
     const handleBlockDetails = async (blockNumber) => {
-        console.log("onclick");
         navigate(`/block/${blockNumber}`);
     };
     return (
@@ -16,7 +15,8 @@ const BlockMinimal = ({ blockNumber, txCount, validator }) => {
                 "flex",
                 "gap-4",
                 "mt-2",
-                "p-4"
+                "p-4",
+                "rounded"
             )}
         >
             <div>
@@ -33,7 +33,12 @@ const BlockMinimal = ({ blockNumber, txCount, validator }) => {
             </div>
             <div>
                 Validator :
-                <span className="text-blue-600 cursor-pointer">
+                <span
+                    onClick={() =>
+                        navigate(`/transavalidatorctions/${validator}`)
+                    }
+                    className="text-blue-600 cursor-pointer"
+                >
                     {formatAddress(validator)}
                 </span>
             </div>
@@ -50,15 +55,19 @@ const Blocks = () => {
     }, []);
     return (
         <div>
-            <h1 className="text-2xl mb-5">Latest Blocks</h1>
-            {blocks.map(({ miner, number, transactions }) => (
-                <BlockMinimal
-                    key={number}
-                    blockNumber={number}
-                    validator={miner}
-                    txCount={transactions.length}
-                />
-            ))}
+            <h1 className="text-2xl text-center mb-5">Latest Blocks</h1>
+            {blocks.length ? (
+                blocks.map(({ miner, number, transactions }) => (
+                    <BlockMinimal
+                        key={number}
+                        blockNumber={number}
+                        validator={miner}
+                        txCount={transactions.length}
+                    />
+                ))
+            ) : (
+                <div>Loading...</div>
+            )}
         </div>
     );
 };

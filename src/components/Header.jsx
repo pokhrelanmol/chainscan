@@ -1,21 +1,24 @@
 import React from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import { joinClasses } from "../helper";
-
 const Header = () => {
+    const navigate = useNavigate();
     return (
         <header
             className={joinClasses(
                 "flex",
                 "justify-around",
+                "items-center",
                 "shadow-sm",
                 "p-5"
             )}
         >
             {/* logo */}
-            <div className="text-red-400">
+            <div className="text-red-400 cursor-pointer">
                 <img
-                    className={joinClasses("w-10", "h-10")}
-                    src="https://imgs.search.brave.com/TwgTFtdYwgK-iBYIyJEmfFuIyg6rPhfewN52z0CC9rs/rs:fit:256:225:1/g:ce/aHR0cHM6Ly90c2Uz/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5x/bFlVM1o4ZlRPWXlE/SXFIQlhHSUx3QUFB/QSZwaWQ9QXBp"
+                    onClick={() => navigate("/")}
+                    className={joinClasses("w-24", "h-24")}
+                    src="https://o.remove.bg/downloads/04e9e02e-d17f-492f-8f57-f98c6c390140/chain-removebg-preview.png"
                     alt="logo"
                 />
             </div>

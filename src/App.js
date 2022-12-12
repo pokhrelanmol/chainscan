@@ -6,6 +6,9 @@ import Transactions from "./components/Transactions";
 import { Route, Routes } from "react-router-dom";
 import { getLastTenBlocks } from "./services";
 import Block from "./components/Block";
+import Transaction from "./components/Transaction";
+import AccountInfo from "./components/AccountTxs";
+import AccountTxs from "./components/AccountTxs";
 
 function App() {
     return (
@@ -17,7 +20,7 @@ function App() {
                     element={
                         <div>
                             <Search />
-                            <div className="flex justify-evenly mt-10">
+                            <div className="flex justify-evenly my-10">
                                 <Blocks />
                                 <Transactions />
                             </div>
@@ -25,6 +28,8 @@ function App() {
                     }
                 />
                 <Route path="/block/:blockNumber" element={<Block />} />
+                <Route path="/transaction/:txHash" element={<Transaction />} />
+                <Route path="/transactions/:address" element={<AccountTxs />} />
             </Routes>
         </div>
     );
