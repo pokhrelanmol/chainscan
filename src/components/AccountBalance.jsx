@@ -7,12 +7,12 @@ import Search from "./Search";
 const AccountBalance = () => {
     const [accountBalance, setAccountBalance] = useState(null);
 
-    const handleSearch = async (address) => {
-        if (!address) {
+    const handleSearch = async (inputValues) => {
+        if (!inputValues) {
             alert("Please enter an address");
             return;
         }
-        const balance = await getAccountBalance(address);
+        const balance = await getAccountBalance(inputValues);
         setAccountBalance(balance.toString());
         return () => {
             setAccountBalance(null);
@@ -20,7 +20,11 @@ const AccountBalance = () => {
     };
     return (
         <div>
-            <Search handleSearch={handleSearch} />
+            <Search
+                handleSearch={handleSearch}
+                placeholder="Address"
+                name="address"
+            />
             {accountBalance === null ? (
                 <div className="text-center text-4xl">
                     Please Search Balance for some Address{" "}

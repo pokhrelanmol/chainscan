@@ -37,6 +37,12 @@ const Header = () => {
                     >
                         Account-Balance
                     </li>
+                    <li
+                        className="text-lg cursor-pointer hover:text-gray-700"
+                        onClick={() => navigate("/nft")}
+                    >
+                        Nft
+                    </li>
                 </ul>
             </nav>
         </header>

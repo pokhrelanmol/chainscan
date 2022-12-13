@@ -57,3 +57,12 @@ export const getAccountTxs = async (address) => {
     const data = await response.json();
     return data.result;
 };
+
+/***********
+ * NFT API *
+ ***********/
+
+export const getNftMetadata = async (nftAddress, tokenId) => {
+    const metadata = await alchemy.nft.getContractMetadata(nftAddress, tokenId);
+    return metadata;
+};

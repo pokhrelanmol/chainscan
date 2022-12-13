@@ -10,6 +10,7 @@ import Transaction from "./components/Transaction";
 import AccountInfo from "./components/AccountTxs";
 import AccountTxs from "./components/AccountTxs";
 import AccountBalance from "./components/AccountBalance";
+import Nft from "./components/Nft";
 
 function App() {
     return (
@@ -31,6 +32,7 @@ function App() {
                 <Route path="/block/:blockNumber" element={<Block />} />
                 <Route path="/transaction/:txHash" element={<Transaction />} />
                 <Route path="/transactions/:address" element={<AccountTxs />} />
+                <Route path="/nft" element={<Nft />} />
             </Routes>
         </div>
     );
