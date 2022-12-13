@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { formatAddress, formatEther, joinClasses } from "../helper";
+import { formatEther, joinClasses } from "../helper";
 import { getIndividualTransaction } from "../services";
 
 const Transaction = () => {
     const { txHash } = useParams();
     const [txData, setTxData] = useState();
     const navigate = useNavigate();
-    useEffect(() => {
-        (async () => {
-            const data = await getIndividualTransaction(txHash);
-            setTxData(data);
-        })();
-    }, []);
+    (async () => {
+        const data = await getIndividualTransaction(txHash);
+        setTxData(data);
+    })();
     return (
         <div>
             <h1 className="text-center text-3xl my-5">Transaction Details</h1>

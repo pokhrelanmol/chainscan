@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { formatAddress, joinClasses } from "../helper";
 import { getLastTenBlocks } from "../services";
 import { useNavigate } from "react-router-dom";
@@ -47,12 +47,10 @@ const BlockMinimal = ({ blockNumber, txCount, validator }) => {
 };
 const Blocks = () => {
     const [blocks, setBlocks] = useState([]);
-    useEffect(() => {
-        (async () => {
-            const _blocks = await getLastTenBlocks();
-            setBlocks(_blocks);
-        })();
-    }, []);
+    (async () => {
+        const _blocks = await getLastTenBlocks();
+        setBlocks(_blocks);
+    })();
     return (
         <div>
             <h1 className="text-2xl text-center mb-5">Latest Blocks</h1>

@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { formatAddress, formatEther, joinClasses } from "../helper";
@@ -50,12 +49,10 @@ const TransactionMinimal = ({ from, to, txhash, amount }) => {
 };
 const Transactions = () => {
     const [transactions, setTransactions] = useState([]);
-    useEffect(() => {
-        (async () => {
-            const txs = await getLastTenTxs();
-            setTransactions(txs);
-        })();
-    }, []);
+    (async () => {
+        const txs = await getLastTenTxs();
+        setTransactions(txs);
+    })();
     return (
         <div>
             <h1 className="text-2xl text-center mb-5">Latest Transactions</h1>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { formatAddress, formatEther, joinClasses } from "../helper";
 import { getAccountTxs } from "../services";
@@ -82,12 +81,11 @@ const Transaction = ({
 const AccountTxs = () => {
     const { address } = useParams();
     const [accountTxs, setAccountTxs] = useState();
-    useEffect(() => {
-        (async () => {
-            const data = await getAccountTxs(address);
-            setAccountTxs(data);
-        })();
-    }, [address]);
+    (async () => {
+        const data = await getAccountTxs(address);
+        setAccountTxs(data);
+    })();
+
     return (
         <div>
             <h1 className="text-3xl text-center my-10">

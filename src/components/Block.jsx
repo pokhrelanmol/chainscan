@@ -1,20 +1,16 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { formatAddress, formatEther, joinClasses } from "../helper";
 import { getIndividualBlock } from "../services";
 const Block = () => {
     const navigate = useNavigate();
     const { blockNumber } = useParams();
-    console.log(blockNumber);
     const [blockData, setBlockData] = useState();
-    useEffect(() => {
-        (async () => {
-            const data = await getIndividualBlock(blockNumber);
-            console.log(data);
-            setBlockData(data);
-        })();
-    }, []);
+    (async () => {
+        const data = await getIndividualBlock(blockNumber);
+        setBlockData(data);
+    })();
 
     //     console.log(formatEther(baseFeePerGas.toString()));
     return (
