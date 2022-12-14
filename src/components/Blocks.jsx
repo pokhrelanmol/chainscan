@@ -34,9 +34,7 @@ const BlockMinimal = ({ blockNumber, txCount, validator }) => {
             <div>
                 Validator :
                 <span
-                    onClick={() =>
-                        navigate(`/transavalidatorctions/${validator}`)
-                    }
+                    onClick={() => navigate(`/transactions/${validator}`)}
                     className="text-blue-600 cursor-pointer"
                 >
                     {formatAddress(validator)}
