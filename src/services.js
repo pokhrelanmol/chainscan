@@ -43,10 +43,11 @@ export const getIndividualTransaction = async (txhash) => {
     const tx = await alchemy.transact.getTransaction(txhash);
     return tx;
 };
-export const getAccountBalance = async (address) => {
+export const getAccountEthBalance = async (address) => {
     const balance = await alchemy.core.getBalance(address, "latest");
     return balance;
 };
+
 /***********************
  * ETHERSCAN API CALLS *
  ***********************/

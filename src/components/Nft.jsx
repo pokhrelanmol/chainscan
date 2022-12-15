@@ -5,6 +5,7 @@ import Search from "./Search";
 const Nft = () => {
     const [nftMetadata, setNftMetadata] = useState();
     const [inputValues, setInputValues] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
     const handleChange = (e) => {
         setInputValues({ ...inputValues, [e.target.name]: e.target.value });
     };
@@ -14,12 +15,13 @@ const Nft = () => {
             alert("Both fields are required ");
             return;
         }
+        setIsLoading(true);
         const _nftMetadata = await getNftMetadata(
             inputValues.nftAddress.toString(),
             inputValues.tokenId.toString()
         );
-        console.log(_nftMetadata);
         setNftMetadata(_nftMetadata);
+        setIsLoading(false);
     };
     return (
         <div>
@@ -69,18 +71,20 @@ const Nft = () => {
                 />
             </form>
             {/* Display Nft */}
-            {nftMetadata && (
+            {nftMetadata ? (
                 <div
                     className={joinClasses(
                         "flex",
                         "flex-col",
-                        "items-center",
+                        "max-w-[500px]",
+                        "mx-auto",
+                        // "items-center",
                         "gap-2",
                         "my-10"
                     )}
                 >
                     <img
-                        className="object-contain"
+                        className="object-fill "
                         src={nftMetadata.openSea.imageUrl}
                         alt="Nft"
                     />
@@ -109,7 +113,9 @@ const Nft = () => {
                         </span>
                     </div>
                 </div>
-            )}
+            ) : isLoading ? (
+                <div className="text-center text-4xl">Loading...</div>
+            ) : null}
         </div>
     );
 };
